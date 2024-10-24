@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rules.c                                            :+:      :+:    :+:   */
+/*   ft_rules.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abboudje <abboudje@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 15:02:59 by abboudje          #+#    #+#             */
-/*   Updated: 2024/06/19 16:32:20 by abboudje         ###   ########.fr       */
+/*   Updated: 2024/10/24 19:29:25 by abboudje         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	swap(t_stack *stack)
 	t_node	*first;
 	t_node	*second;
 	int		c;
-	
+
 	first = stack->top;
 	second = first->next;
 	c = first->value;
@@ -28,7 +28,7 @@ void	swap(t_stack *stack)
 
 void	rotation(t_stack *stack)
 {
-	t_node *top;
+	t_node	*top;
 	t_node	*current;
 
 	top = stack->top;
@@ -43,7 +43,7 @@ void	rotation(t_stack *stack)
 
 void	re_retation(t_stack *stack)
 {
-	t_node *prev;
+	t_node	*prev;
 	t_node	*current;
 
 	prev = NULL;

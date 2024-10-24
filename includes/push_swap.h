@@ -6,16 +6,16 @@
 /*   By: abboudje <abboudje@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 14:54:14 by abboudje          #+#    #+#             */
-/*   Updated: 2024/10/07 15:46:10 by abboudje         ###   ########.fr       */
+/*   Updated: 2024/10/24 19:31:51 by abboudje         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
-#define PUSH_SWAP_H
+# define PUSH_SWAP_H
 
-#include<stdio.h>
-#include<stdlib.h>
-#include<stdbool.h>
+# include<stdio.h>
+# include<stdlib.h>
+# include<stdbool.h>
 
 typedef struct s_node
 {
