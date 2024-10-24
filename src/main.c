@@ -6,7 +6,7 @@
 /*   By: abboudje <abboudje@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 15:31:40 by abboudje          #+#    #+#             */
-/*   Updated: 2024/10/07 15:48:46 by abboudje         ###   ########.fr       */
+/*   Updated: 2024/10/09 17:52:54 by abboudje         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int	main(int ac, char **av)
 	a->top = NULL;
 	while (ac > 1)
 	{
+		// atoi remove
 		push(a, atoi(av[--ac]));
 	}
 	print(a);

@@ -6,13 +6,13 @@
 /*   By: abboudje <abboudje@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 10:51:12 by abboudje          #+#    #+#             */
-/*   Updated: 2024/10/07 15:27:11 by abboudje         ###   ########.fr       */
+/*   Updated: 2024/10/09 19:21:06 by abboudje         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	str1(t_stack *a)
+void	sort2(t_stack *a)
 {
 	t_node *first = a->top;
 	t_node *second = first->next;
@@ -20,7 +20,7 @@ void	str1(t_stack *a)
 		swap(a);
 }
 
-void	str2(t_stack *a)
+void	sort3(t_stack *a)
 {
 	//t_node	*first = a->top;
 	
@@ -31,17 +31,23 @@ void	str2(t_stack *a)
 	if (is_first_sup_second(a))
 		swap(a);
 }
+void	sort45(t_stack *stack_a)
+{
+	
+}
 
-void	ft_algo(t_stack *stack)
+void	ft_algo(t_stack *stack_a)
 {
 	static int	len = 0;
-	if (!is_in_order(stack))
+	if (!is_in_order(stack_a))
 	{
-		len = count(stack);
+		len = count(stack_a);
 		if (len == 2)
-			str1(stack);
+			sort2(stack_a);
 		else if(len == 3)
-			str2(stack);
+			sort3(stack_a);
+		else if(len == 4 || len == 5)
+			sort45(stack_a);
 	}
 	else
 		printf("");
