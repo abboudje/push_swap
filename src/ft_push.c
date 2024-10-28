@@ -6,7 +6,7 @@
 /*   By: abboudje <abboudje@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 10:51:12 by abboudje          #+#    #+#             */
-/*   Updated: 2024/10/24 19:26:12 by abboudje         ###   ########.fr       */
+/*   Updated: 2024/10/25 02:34:43 by abboudje         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,10 @@ void	sort3(t_stack *a)
 		swap(a);
 }
 
-void	sort45(t_stack *stack_a)
+ void	sort45(t_stack *stack_a)
 {
-}
+	stack_a = NULL;
+} 
 
 void	ft_algo(t_stack *stack_a)
 {
