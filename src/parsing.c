@@ -1,100 +1,14 @@
 #include "push_swap.h"
-/* 
-void	check_duplicates(int *unordered, int size)
-{
-	int	i;
-	int	j;
+ 
 
-	i = -1;
-	while (++i < size)
-	{
-		j = i + 1;
-		while (j < size)
-		{
-			if (unordered[i] == unordered[j])
-			{
-				free(unordered);
-				error_message("Error\n");
-			}
-			++j;
-		}
-	}
-}
 
-void	check_num1(char *num, char **temp)
-{
-	int	len;
 
-	len = ft_strlen(num);
-	if ((num[0] == '+' || num[0] == '-') && num[1] == '0')
-		free_and_exit(temp, get_matrix_size(temp), "Error\n");
-	else if (num[0] == '0' && num[1] != '\0')
-		free_and_exit(temp, get_matrix_size(temp), "Error\n");
-	else if (num[0] == '-' && num[1] == '\0')
-		free_and_exit(temp, get_matrix_size(temp), "Error\n");
-	else if (num[0] == '+' && num[1] == '\0')
-		free_and_exit(temp, get_matrix_size(temp), "Error\n");
-	else if (len < 10)
-		return ;
-	else if (((num[0] == '+' || num[0] == '-') && len > 11)
-		|| (ft_isdigit(num[0]) == 1 && len > 10))
-		free_and_exit(temp, get_matrix_size(temp), "Error\n");
-	else if (num[0] == '+' && (ft_strncmp(num, "+2147483647", len) > 0))
-		free_and_exit(temp, get_matrix_size(temp), "Error\n");
-	else if (num[0] == '-' && (ft_strncmp(num, "-2147483648", len) > 0))
-		free_and_exit(temp, get_matrix_size(temp), "Error\n");
-	else if (ft_strncmp(num, "2147483647", len) > 0)
-		free_and_exit(temp, get_matrix_size(temp), "Error\n");
-}
-
-void	check_num(char *num, char **temp, int *nums_count)
-{
-	int	i;
-
-	i = 0;
-	*nums_count += 1;
-	if (!ft_isdigit(num[0]) && num[0] != '+' && num[0] != '-')
-		free_and_exit(temp, get_matrix_size(temp), "Error\n");
-	while (num[++i])
-		if (!ft_isdigit(num[i]))
-			free_and_exit(temp, get_matrix_size(temp), "Error\n");
-	check_num1(num, temp);
-} */
-
-/* int	get_len_inputs(char **argv)
-{
-	int		i;
-	int		j;
-	char	**temp;
-	int		nums_count;
-
-	i = 0;
-	nums_count = 0;
-	while (argv[++i])
-	{
-		temp = ft_split(argv[i], ' ');
-		if (!temp)
-			print_error();
-		else if (temp[0] == NULL)
-			free_matrix(temp, 1);
-		else
-		{
-			j = -1;
-			while (temp[++j])
-				check_num(temp[j], temp, &nums_count);
-			free_matrix(temp, get_matrix_size(temp));
-		}
-	}
-	return (nums_count);
-} */
 
 char *ft_get_str(int argc, char **argv)
 {
 	char	*str;
 	char	*temp;
-	int	*nbs;
-	int	i;
-	int	total_len;
+	int		i;
 
 	if (argc < 2)
 		exit(0);
@@ -110,24 +24,104 @@ char *ft_get_str(int argc, char **argv)
 			free(temp);
 		}
 		else
-		{
 			str = temp;
-		}
 		i++;
 	}
-	//total_len = ft_total_len(argc, argv);
-	//str = ft_get_str(argc, argv, total_len);
-	printf("*%s*", str);
-	//free(temp);
 	return (str);
 }
 
+int is_number(char *str)
+{
+	int	i;
 
+	i = 0;
+	if (str[i] == '-' || str[i] == '+')
+	{
+		if (!str[i + 1])
+			return (0);
+		i++;
+	}
+	while (str[i])
+	{
+		if (!ft_isdigit(str[i]))
+			return (0);
+		i++;
+	}
+	return (1);
+}
 
-int	parsing_inputs(int argc, char **argv)
+int is_big(char *str)
+{
+	int	size;
+
+	size = ft_strlen(str);
+	//printf("size is = %d \n", size);
+	if (str[0] == '+' && (size > 10) && (ft_strncmp(str, "+2147483647", size) > 0))
+		return (1);
+	else if (str[0] == '-' && (size > 10) && (ft_strncmp(str, "-2147483648", size) > 0))
+		return (1);
+	else if ((size > 9) && ft_strncmp(str, "2147483647", size) > 0)
+		return (1);
+	return (0);
+}
+
+int	is_all_numbers(char **lst)
+{
+	int	i;
+
+	if (!lst[0])
+		return (0);
+	i = 0;
+	while (lst[i])
+	{
+		if(!is_number(lst[i]))
+			return (0);
+		if(is_big(lst[i]))
+			return (0);
+		i++;
+	}
+	return (1);
+}
+int *convert_to_int(char **lst, int size)
+{
+	int	i;
+	int	*nbrs;
+
+	size = 0;
+	while (lst[size])
+		size++;
+	nbrs = (int *)malloc(sizeof(int) * size);
+	if (!nbrs)
+		return (NULL);
+	i = 0;
+	while (i < size)
+	{
+		nbrs[i]  = ft_atoi(lst[i]);
+		i++;
+	}
+	//printf("size is %d", size);
+	return nbrs;
+}
+
+char	**parsing_inputs(int argc, char **argv)
 {
 	char	*str;
-	ft_get_str(argc, argv);
-	//printf("le = %d \n", total_len);	
-	return (0);
+	char	**lst;
+	int		*nbrs;
+	int		i;
+
+	str =  ft_get_str(argc, argv);
+	lst = ft_split(str, ' ');
+	free(str);
+	if(!is_all_numbers(lst))
+	{
+		i = 0;
+		while (lst[i])
+			free(lst[i++]);
+		free(lst);
+		lst = NULL;
+		print_error();
+	}
+		return (lst);
+	return (NULL);
 }
