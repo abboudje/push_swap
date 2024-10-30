@@ -1,8 +1,4 @@
 #include "push_swap.h"
- 
-
-
-
 
 char *ft_get_str(int argc, char **argv)
 {
@@ -28,26 +24,6 @@ char *ft_get_str(int argc, char **argv)
 		i++;
 	}
 	return (str);
-}
-
-int is_number(char *str)
-{
-	int	i;
-
-	i = 0;
-	if (str[i] == '-' || str[i] == '+')
-	{
-		if (!str[i + 1])
-			return (0);
-		i++;
-	}
-	while (str[i])
-	{
-		if (!ft_isdigit(str[i]))
-			return (0);
-		i++;
-	}
-	return (1);
 }
 
 int is_big(char *str)
@@ -107,7 +83,6 @@ char	**parsing_inputs(int argc, char **argv)
 {
 	char	*str;
 	char	**lst;
-	int		*nbrs;
 	int		i;
 
 	str =  ft_get_str(argc, argv);
@@ -120,8 +95,9 @@ char	**parsing_inputs(int argc, char **argv)
 			free(lst[i++]);
 		free(lst);
 		lst = NULL;
-		print_error();
+		exit_with_error();
 	}
 		return (lst);
 	return (NULL);
 }
+

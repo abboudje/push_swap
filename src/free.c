@@ -7,24 +7,6 @@
 	//error_message(sms);
 }
 
-void	free_matrix(char **matrix, int size)
-{
-	--size;
-	while (size >= 0)
-	{
-		free(matrix[size]);
-		matrix[size] = NULL;
-		--size;
-	}
-	free(matrix);
-	matrix = NULL;
-}
-
-void	free_and_exit(char **matrix, int size, char *sms)
-{
-	free_matrix(matrix, size);
-	print_error();
-}
 
 void	free_list_and_exit(t_stack *stack, int *arrays[], int i)
 {
@@ -40,10 +22,10 @@ void	free_list_and_exit(t_stack *stack, int *arrays[], int i)
 		free(stack->head);
 		stack->head = temp;
 	}
-	print_error();
+	exit_with_error();
 }
-
-void	free_stacks_and_arrays(t_stack *st_a, t_stack *st_b, int *a1, int *a2)
+*/
+void	free_all(t_stack *st_a, t_stack *st_b, int *a1, int *a2)
 {
 	t_lst	*temp;
 	int		i;
@@ -67,4 +49,4 @@ void	free_stacks_and_arrays(t_stack *st_a, t_stack *st_b, int *a1, int *a2)
 	}
 	free(a1);
 	free(a2);
-} */
+} 

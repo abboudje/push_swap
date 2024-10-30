@@ -6,7 +6,7 @@
 /*   By: abboudje <abboudje@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 15:31:40 by abboudje          #+#    #+#             */
-/*   Updated: 2024/10/29 03:33:43 by abboudje         ###   ########.fr       */
+/*   Updated: 2024/10/30 11:53:24 by abboudje         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,8 @@ int	is_unique(int *unordered, int size)
 	return (1);
 }
 
-void	freeing(char **lst, int *nbrs,int size)
+void free_list(char **lst,int  size)
 {
-	free(nbrs);
 	--size;
 	while (size >= 0)
 	{
@@ -55,32 +54,57 @@ void	freeing(char **lst, int *nbrs,int size)
 	free(lst);
 	lst = NULL;
 }
-void ft_push_swap(int *nbrs, int size)
+
+void ft_push_swap(int *tab, int size)
 {
-	printf("Impliment the algo");
+	t_stack	stack_a;
+	t_stack	stack_b;
+	int		*sorted;
+
+	init_stack(&stack_b, &sorted);
+	if (is_sorted(tab, size))
+	{
+		free(tab);
+		exit(0);
+	}
+	sorted = copy_into_sorted(tab, size);
+ 	if (size == 2)
+	{
+		ft_printf("sa");
+		free(sorted);
+		free(tab);
+	}
+	else if (size >= 3)
+	{
+		make_stack_a(&stack_a, tab, sorted, size);
+		if (size >= 3 && size <= 5)
+		{
+			forbbiden_sorting(size, &stack_a, &stack_b);
+		}
+		else
+			butterfly_algo(&stack_a, &stack_b, size);
+		free_all(&stack_a, &stack_b, tab, sorted); 
+	}
 }
 
 int	main(int argc, char **argv)
 {
 	char	**lst;
 	int		size;
-	int		*nbrs;
-	int		*sorted;
-	t_stack	stack_a;
-	t_stack	stack_b;
+	int		*tab;
+
 	// Make Parsing
 	// I have to rename the varbs 
-	//init_stack(&stack_b, &sorted);
 	lst = parsing_inputs(argc, argv);
 	size = sizeof_table(lst);
- 	printf("size = %d \n", size);
-	nbrs = convert_to_int(lst, size);
-	int i = 0;
-	if (!is_unique(nbrs, size))
+ 	//printf("size = %d \n", size);
+	tab = convert_to_int(lst, size);
+	free_list(lst, size);	
+	if (!is_unique(tab, size))
 	{
-		freeing(lst, nbrs, size);
-		print_error();
+		free(tab);
+		exit_with_error();
 	}
-	ft_push_swap(nbrs, size);
+	ft_push_swap(tab, size);
 	// Make the algo
 }
