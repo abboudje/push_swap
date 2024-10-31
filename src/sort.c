@@ -6,7 +6,7 @@
 /*   By: abboudje <abboudje@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 16:42:22 by abboudje          #+#    #+#             */
-/*   Updated: 2024/10/29 16:54:02 by abboudje         ###   ########.fr       */
+/*   Updated: 2024/10/31 14:17:58 by abboudje         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ void	bubble_sort(int *tab, int size)
 	}
 }
 
-
 int	*copy_into_sorted(int *tab, int size)
 {
 	int	*result;
@@ -46,7 +45,6 @@ int	*copy_into_sorted(int *tab, int size)
 	{
 		free(tab);
 		exit(0);
-		//exit_with_error();
 	}
 	while (++i < size)
 		result[i] = tab[i];
@@ -60,7 +58,6 @@ bool	is_sorted(int *tab, int size)
 
 	i = 0;
 	if (size < 2)
-		//ft_free(tab, NULL, "");
 	{
 		free(tab);
 		exit(0);

@@ -6,7 +6,7 @@
 /*   By: abboudje <abboudje@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 17:56:13 by abboudje          #+#    #+#             */
-/*   Updated: 2024/10/29 19:00:25 by abboudje         ###   ########.fr       */
+/*   Updated: 2024/10/31 14:00:52 by abboudje         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,14 @@ int	find_index(int *arr, int value, int size)
 			return (i);
 	}
 	return (0);
+}
+
+void	init_stack(t_stack *st_b, int **sorted)
+{
+	st_b->head = NULL;
+	st_b->tail = NULL;
+	st_b->nodes = 0;
+	*sorted = NULL;
 }
 
 t_lst	*make_lst(t_stack *stack, int *arrays[], int size, int i)
@@ -70,18 +78,4 @@ void	make_stack_a(t_stack *stack, int *unordered, int *sorted, int size)
 	stack->tail->next = stack->head;
 	stack->head->prev = stack->tail;
 	stack->nodes = size;
-}
-
-void	free_stack(t_stack *stack , int size)
-{
-	int		j;
-	t_lst	*temp;
-
-	j = -1;
-	while (++j < size)
-	{
-		temp = stack->head->next;
-		free(stack->head);
-		stack->head = temp;
-	}
 }

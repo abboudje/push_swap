@@ -1,30 +1,30 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   free.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abboudje <abboudje@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/31 14:06:29 by abboudje          #+#    #+#             */
+/*   Updated: 2024/10/31 14:15:28 by abboudje         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
-/* void	ft_free(int *unordered, int *sorted, char *sms)
+void	free_list(char **lst, int size)
 {
-	free(unordered);
-	free(sorted);
-	//error_message(sms);
-}
-
-
-void	free_list_and_exit(t_stack *stack, int *arrays[], int i)
-{
-	int		j;
-	t_lst	*temp;
-
-	j = -1;
-	free(arrays[0]);
-	free(arrays[1]);
-	while (++j < i)
+	--size;
+	while (size >= 0)
 	{
-		temp = stack->head->next;
-		free(stack->head);
-		stack->head = temp;
+		free(lst[size]);
+		lst[size] = NULL;
+		--size;
 	}
-	exit_with_error();
+	free(lst);
+	lst = NULL;
 }
-*/
+
 void	free_all(t_stack *st_a, t_stack *st_b, int *a1, int *a2)
 {
 	t_lst	*temp;
@@ -49,4 +49,18 @@ void	free_all(t_stack *st_a, t_stack *st_b, int *a1, int *a2)
 	}
 	free(a1);
 	free(a2);
-} 
+}
+
+void	free_stack(t_stack *stack, int size)
+{
+	int		j;
+	t_lst	*temp;
+
+	j = -1;
+	while (++j < size)
+	{
+		temp = stack->head->next;
+		free(stack->head);
+		stack->head = temp;
+	}
+}

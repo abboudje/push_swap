@@ -6,7 +6,7 @@
 /*   By: abboudje <abboudje@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 17:23:36 by abboudje          #+#    #+#             */
-/*   Updated: 2024/10/29 17:36:05 by abboudje         ###   ########.fr       */
+/*   Updated: 2024/10/31 14:28:19 by abboudje         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	swap_stack(t_stack *stack, char *action)
 {
 	int	temp;
 
-	ft_printf(action);
+	ft_print(action);
 	temp = stack->head->value;
 	stack->head->value = stack->head->next->value;
 	stack->head->next->value = temp;
@@ -29,14 +29,14 @@ void	rotate_stack(t_stack *stack, char *action)
 {
 	if (stack->nodes <= 1)
 		return ;
-	ft_printf(action);
+	ft_print(action);
 	stack->head = stack->head->next;
 	stack->tail = stack->tail->next;
 }
 
 void	reverse_rotate_stack(t_stack *stack, char *action)
 {
-	ft_printf(action);
+	ft_print(action);
 	stack->head = stack->head->prev;
 	stack->tail = stack->tail->prev;
 }
@@ -92,5 +92,5 @@ void	push_stack_2(t_stack *from, char *action)
 		from->head = from->tail->next;
 	}
 	--from->nodes;
-	ft_printf(action);
+	ft_print(action);
 }

@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parsing.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abboudje <abboudje@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/31 14:10:24 by abboudje          #+#    #+#             */
+/*   Updated: 2024/10/31 14:15:12 by abboudje         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
-char *ft_get_str(int argc, char **argv)
+char	*ft_get_str(int argc, char **argv)
 {
 	char	*str;
 	char	*temp;
@@ -8,7 +20,7 @@ char *ft_get_str(int argc, char **argv)
 
 	if (argc < 2)
 		exit(0);
-	str = ft_strdup("");// Initialiation
+	str = ft_strdup("");
 	i = 1;
 	while (i < argc)
 	{
@@ -26,15 +38,16 @@ char *ft_get_str(int argc, char **argv)
 	return (str);
 }
 
-int is_big(char *str)
+int	is_big(char *str)
 {
 	int	size;
 
 	size = ft_strlen(str);
-	//printf("size is = %d \n", size);
-	if (str[0] == '+' && (size > 10) && (ft_strncmp(str, "+2147483647", size) > 0))
+	if (str[0] == '+' && (size > 10)
+		&& (ft_strncmp(str, "+2147483647", size) > 0))
 		return (1);
-	else if (str[0] == '-' && (size > 10) && (ft_strncmp(str, "-2147483648", size) > 0))
+	else if (str[0] == '-' && (size > 10)
+		&& (ft_strncmp(str, "-2147483648", size) > 0))
 		return (1);
 	else if ((size > 9) && ft_strncmp(str, "2147483647", size) > 0)
 		return (1);
@@ -50,15 +63,16 @@ int	is_all_numbers(char **lst)
 	i = 0;
 	while (lst[i])
 	{
-		if(!is_number(lst[i]))
+		if (!is_number(lst[i]))
 			return (0);
-		if(is_big(lst[i]))
+		if (is_big(lst[i]))
 			return (0);
 		i++;
 	}
 	return (1);
 }
-int *convert_to_int(char **lst, int size)
+
+int	*convert_to_int(char **lst, int size)
 {
 	int	i;
 	int	*nbrs;
@@ -72,11 +86,10 @@ int *convert_to_int(char **lst, int size)
 	i = 0;
 	while (i < size)
 	{
-		nbrs[i]  = ft_atoi(lst[i]);
+		nbrs[i] = ft_atoi(lst[i]);
 		i++;
 	}
-	//printf("size is %d", size);
-	return nbrs;
+	return (nbrs);
 }
 
 char	**parsing_inputs(int argc, char **argv)
@@ -85,10 +98,10 @@ char	**parsing_inputs(int argc, char **argv)
 	char	**lst;
 	int		i;
 
-	str =  ft_get_str(argc, argv);
+	str = ft_get_str(argc, argv);
 	lst = ft_split(str, ' ');
 	free(str);
-	if(!is_all_numbers(lst))
+	if (!is_all_numbers(lst))
 	{
 		i = 0;
 		while (lst[i])
@@ -97,7 +110,5 @@ char	**parsing_inputs(int argc, char **argv)
 		lst = NULL;
 		exit_with_error();
 	}
-		return (lst);
-	return (NULL);
+	return (lst);
 }
-

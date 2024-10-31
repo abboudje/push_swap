@@ -6,13 +6,13 @@
 /*   By: abboudje <abboudje@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 15:58:10 by abboudje          #+#    #+#             */
-/*   Updated: 2024/10/29 19:38:57 by abboudje         ###   ########.fr       */
+/*   Updated: 2024/10/31 14:28:19 by abboudje         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int is_number(char *str)
+int	is_number(char *str)
 {
 	int	i;
 
@@ -32,11 +32,12 @@ int is_number(char *str)
 	return (1);
 }
 
-void ft_printf(char *str)
+void	ft_print(char *str)
 {
 	ft_putstr_fd(str, 1);
 	ft_putstr_fd("\n", 1);
 }
+
 int	generate_chunk(int size)
 {
 	int	chunk;
@@ -59,21 +60,4 @@ void	exit_with_error(void)
 {
 	write(2, "Error\n", 6);
 	exit(-1);
-}
-
-#include <stdio.h>
-void print_stack(t_stack *stack, int size) {
-    t_lst *current = stack->head;
-
-    if (size == 0) {
-        printf("Stack is empty\n");
-        return;
-    }
-
-    printf("Stack values:\n");
-    for (int i = 0; i < size; i++) {
-        printf("%d ", current->value);
-        current = current->next;
-    }
-    printf("\n");
 }

@@ -1,15 +1,25 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   stack.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abboudje <abboudje@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/31 14:09:21 by abboudje          #+#    #+#             */
+/*   Updated: 2024/10/31 14:28:19 by abboudje         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
-void	init_stack(t_stack *st_b, int **sorted)
+void	sort_2(int *tab, int *sorted)
 {
-	st_b->head = NULL;
-	st_b->tail = NULL;
-	st_b->nodes = 0;
-	*sorted = NULL;
+	ft_print("sa");
+	free(sorted);
+	free(tab);
 }
 
-
-void	triple_sort(t_stack *stack_a)
+void	sort_3(t_stack *stack_a)
 {
 	int	arr[3];
 
@@ -36,19 +46,19 @@ void	triple_sort(t_stack *stack_a)
 	}
 }
 
-void	fourple_sort(t_stack *stack_a, t_stack *stack_b, int size)
+void	sort_4(t_stack *stack_a, t_stack *stack_b, int size)
 {
 	t_lst	*lst;
 
 	lst = stack_a->head;
 	find_max_and_push_b(lst, stack_a, size);
 	push_stack(stack_a, stack_b, "pb");
-	triple_sort(stack_a);
+	sort_3(stack_a);
 	push_stack(stack_b, stack_a, "pa");
 	rotate_stack(stack_a, "ra");
 }
 
-void	fiveple_sort(t_stack *stack_a, t_stack *stack_b, int size)
+void	sort_5(t_stack *stack_a, t_stack *stack_b, int size)
 {
 	t_lst	*lst;
 
@@ -58,21 +68,9 @@ void	fiveple_sort(t_stack *stack_a, t_stack *stack_b, int size)
 	lst = stack_a->head;
 	find_max_and_push_b(lst, stack_a, size - 1);
 	push_stack(stack_a, stack_b, "pb");
-	triple_sort(stack_a);
+	sort_3(stack_a);
 	push_stack(stack_b, stack_a, "pa");
 	rotate_stack(stack_a, "ra");
 	push_stack(stack_b, stack_a, "pa");
 	rotate_stack(stack_a, "ra");
 }
-
-void	forbbiden_sorting(int size, t_stack *stack_a, t_stack *stack_b)
-{
-	print_stack(stack_a, size);
-	if (size == 3)
-		triple_sort(stack_a);
-	else if (size == 4)
-		fourple_sort(stack_a, stack_b, size);
-	else
-		fiveple_sort(stack_a, stack_b, size);
-}
-
