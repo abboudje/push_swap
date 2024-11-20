@@ -6,13 +6,13 @@
 /*   By: abboudje <abboudje@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 18:44:02 by abboudje          #+#    #+#             */
-/*   Updated: 2024/10/31 14:20:06 by abboudje         ###   ########.fr       */
+/*   Updated: 2024/10/31 18:38:47 by abboudje         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	find_max_and_push_b(t_lst *lst, t_stack *stack_a, int size)
+void	push_max_a_to_b(t_node *current, t_stack *stack_a, int size)
 {
 	int	i;
 	int	is_tail;
@@ -21,7 +21,7 @@ void	find_max_and_push_b(t_lst *lst, t_stack *stack_a, int size)
 	is_tail = 0;
 	while (is_tail == 0)
 	{
-		if (lst->index == size - 1)
+		if (current->index == size - 1)
 		{
 			if (i > size - i - 1)
 			{
@@ -34,13 +34,13 @@ void	find_max_and_push_b(t_lst *lst, t_stack *stack_a, int size)
 			break ;
 		}
 		++i;
-		lst = lst->next;
-		if (lst == stack_a->head)
+		current = current->next;
+		if (current == stack_a->head)
 			is_tail = 1;
 	}
 }
 
-void	find_max_and_push_a(t_lst *lst, t_stack *stack_b, int size)
+void	push_max_b_to_a(t_node *current, t_stack *stack_b, int size)
 {
 	int	i;
 	int	is_tail;
@@ -49,7 +49,7 @@ void	find_max_and_push_a(t_lst *lst, t_stack *stack_b, int size)
 	is_tail = 0;
 	while (is_tail == 0)
 	{
-		if (lst->index == size - 1)
+		if (current->index == size - 1)
 		{
 			if (i > size - i - 1)
 			{
@@ -62,47 +62,47 @@ void	find_max_and_push_a(t_lst *lst, t_stack *stack_b, int size)
 			break ;
 		}
 		++i;
-		lst = lst->next;
-		if (lst == stack_b->head)
+		current = current->next;
+		if (current == stack_b->head)
 			is_tail = 1;
 	}
 }
 
 void	sort_stack(t_stack *st_a, t_stack *st_b)
 {
-	t_lst	*lst;
+	t_node	*current;
 
 	while (st_b->head != NULL)
 	{
-		lst = st_b->head;
-		find_max_and_push_a(lst, st_b, st_b->nodes);
+		current = st_b->head;
+		push_max_b_to_a(current, st_b, st_b->size);
 		push_stack(st_b, st_a, "pa");
 	}
 }
 
 void	make_butterfly(t_stack *st_a, t_stack *st_b, int chunk)
 {
-	int		counter;
-	t_lst	*lst;
+	int		index_b;
+	t_node	*current;
 
-	counter = 0;
-	lst = st_a->head;
+	index_b = 0;
+	current = st_a->head;
 	while (st_a->head != NULL)
 	{
-		if (lst->index <= counter)
+		if (current->index <= index_b)
 		{
 			push_stack(st_a, st_b, "pb");
 			rotate_stack(st_b, "rb");
-			++counter;
+			++index_b;
 		}
-		else if (lst->index <= counter + chunk)
+		else if (current->index <= index_b + chunk)
 		{
 			push_stack(st_a, st_b, "pb");
-			++counter;
+			++index_b;
 		}
 		else
 			rotate_stack(st_a, "ra");
-		lst = st_a->head;
+		current = st_a->head;
 	}
 }
 

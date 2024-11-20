@@ -6,7 +6,7 @@
 /*   By: abboudje <abboudje@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 14:54:14 by abboudje          #+#    #+#             */
-/*   Updated: 2024/10/31 14:28:19 by abboudje         ###   ########.fr       */
+/*   Updated: 2024/10/31 18:38:47 by abboudje         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,27 +18,27 @@
 # include<unistd.h>
 # include "libft.h"
 
-typedef struct s_lst
+typedef struct s_node
 {
 	int				value;
 	int				index;
-	struct s_lst	*next;
-	struct s_lst	*prev;
-}	t_lst;
+	struct s_node	*next;
+	struct s_node	*prev;
+}	t_node;
 
 typedef struct s_stack
 {
-	t_lst	*head;
-	t_lst	*tail;
-	int		nodes;
+	t_node	*head;
+	t_node	*tail;
+	int		size;
 }	t_stack;
 /*************************MAIN.C ************************/
 int		sizeof_table(char **tab);
-int		is_unique(int *unordered, int size);
-void	ft_push_swap(int *nbrs, int size);
+int		is_unique(int *tab, int size);
+void	ft_push_swap(int *tab, int size);
 /****************************ALGO.C*****************************/
-void	find_max_and_push_b(t_lst *lst, t_stack *stack_a, int size);
-void	find_max_and_push_a(t_lst *lst, t_stack *stack_b, int size);
+void	push_max_a_to_b(t_node *lst, t_stack *stack_a, int size);
+void	push_max_b_to_a(t_node *lst, t_stack *stack_b, int size);
 void	sort_stack(t_stack *st_a, t_stack *st_b);
 void	make_butterfly(t_stack *st_a, t_stack *st_b, int chunk);
 void	butterfly_algo(t_stack *st_a, t_stack *st_b, int size);
@@ -49,9 +49,9 @@ void	sort_4(t_stack *stack_a, t_stack *stack_b, int size);
 void	sort_5(t_stack *stack_a, t_stack *stack_b, int size);
 /*****************************CREATE STACK*****************************/
 void	init_stack(t_stack *st_b, int **sorted);
-int		find_index(int *arr, int value, int size);
-t_lst	*make_lst(t_stack *stack, int *arrays[], int size, int i);
-void	make_stack_a(t_stack *stack, int *unordered, int *sorted, int size);
+int		find_index(int *tab, int value, int size);
+t_node	*add_node(t_stack *stack, int *arrays[], int size, int i);
+void	make_stack_a(t_stack *stack, int *tab, int *sorted, int size);
 /**************************** MOVES.C **********************************/
 void	swap_stack(t_stack *stack, char *action);
 void	rotate_stack(t_stack *stack, char *action);

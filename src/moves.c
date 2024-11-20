@@ -6,7 +6,7 @@
 /*   By: abboudje <abboudje@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 17:23:36 by abboudje          #+#    #+#             */
-/*   Updated: 2024/10/31 14:28:19 by abboudje         ###   ########.fr       */
+/*   Updated: 2024/10/31 15:39:12 by abboudje         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	swap_stack(t_stack *stack, char *action)
 
 void	rotate_stack(t_stack *stack, char *action)
 {
-	if (stack->nodes <= 1)
+	if (stack->size <= 1)
 		return ;
 	ft_print(action);
 	stack->head = stack->head->next;
@@ -43,12 +43,12 @@ void	reverse_rotate_stack(t_stack *stack, char *action)
 
 void	push_stack(t_stack *from, t_stack *to, char *action)
 {
-	t_lst	*new_lst;
+	t_node	*new_lst;
 
-	new_lst = malloc(sizeof(t_lst));
+	new_lst = malloc(sizeof(t_node));
 	if (!new_lst)
 		exit_with_error();
-	++to->nodes;
+	++to->size;
 	new_lst->value = from->head->value;
 	new_lst->index = from->head->index;
 	if (to->head == NULL)
@@ -71,13 +71,13 @@ void	push_stack(t_stack *from, t_stack *to, char *action)
 
 void	push_stack_2(t_stack *from, char *action)
 {
-	if (from->nodes == 1)
+	if (from->size == 1)
 	{
 		free(from->head);
 		from->head = NULL;
 		from->tail = NULL;
 	}
-	else if (from->nodes == 2)
+	else if (from->size == 2)
 	{
 		from->tail->next = NULL;
 		from->tail->prev = NULL;
@@ -91,6 +91,6 @@ void	push_stack_2(t_stack *from, char *action)
 		free(from->head);
 		from->head = from->tail->next;
 	}
-	--from->nodes;
+	--from->size;
 	ft_print(action);
 }

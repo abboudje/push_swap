@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   stack.c                                            :+:      :+:    :+:   */
+/*   mini_sort.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abboudje <abboudje@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 14:09:21 by abboudje          #+#    #+#             */
-/*   Updated: 2024/10/31 14:28:19 by abboudje         ###   ########.fr       */
+/*   Updated: 2024/10/31 18:38:30 by abboudje         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,10 @@ void	sort_3(t_stack *stack_a)
 
 void	sort_4(t_stack *stack_a, t_stack *stack_b, int size)
 {
-	t_lst	*lst;
+	t_node	*lst;
 
 	lst = stack_a->head;
-	find_max_and_push_b(lst, stack_a, size);
+	push_max_a_to_b(lst, stack_a, size);
 	push_stack(stack_a, stack_b, "pb");
 	sort_3(stack_a);
 	push_stack(stack_b, stack_a, "pa");
@@ -60,13 +60,13 @@ void	sort_4(t_stack *stack_a, t_stack *stack_b, int size)
 
 void	sort_5(t_stack *stack_a, t_stack *stack_b, int size)
 {
-	t_lst	*lst;
+	t_node	*lst;
 
 	lst = stack_a->head;
-	find_max_and_push_b(lst, stack_a, size);
+	push_max_a_to_b(lst, stack_a, size);
 	push_stack(stack_a, stack_b, "pb");
 	lst = stack_a->head;
-	find_max_and_push_b(lst, stack_a, size - 1);
+	push_max_a_to_b(lst, stack_a, size - 1);
 	push_stack(stack_a, stack_b, "pb");
 	sort_3(stack_a);
 	push_stack(stack_b, stack_a, "pa");
